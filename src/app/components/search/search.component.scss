@@ -1,0 +1,66 @@
+.search-container {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+
+  h2 {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccd6f6;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: #0078ff;
+      box-shadow: 0 0 0 2px rgba(0, 120, 255, 0.1);
+    }
+  }
+
+  .search-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+
+    .icon {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background-color: #005ecb;
+      box-shadow: 0 2px 8px rgba(0, 94, 203, 0.2);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}

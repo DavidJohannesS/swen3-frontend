@@ -1,0 +1,130 @@
+//global layour
+.app-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f9fbfd;
+  color: #1a1a1a;
+}
+
+//sidebar
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #f1f5ff 0%, #e4ecff 100%);
+  padding: 2rem 1.5rem;
+  position: fixed;
+  height: 100%;
+  border-right: 1px solid #d6e0ff;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1.2rem;
+}
+
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #2f3b52;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar a:hover {
+  background-color: rgba(0, 120, 255, 0.1);
+  color: #0051b8;
+}
+
+.sidebar a.active {
+  background-color: #0078ff;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 120, 255, 0.3);
+}
+
+//content area
+.content {
+  margin-left: 260px;
+  padding: 3rem 2rem;
+  width: calc(100% - 260px);
+  background-color: #f9fbfd;
+  overflow-y: auto;
+}
+
+//headings
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+//Buttons global
+button {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  background-color: #0078ff;
+  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #005ecb;
+  box-shadow: 0 2px 8px rgba(0, 94, 203, 0.2);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+//Scrollbar Cleanup
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: #ccd6f6;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background-color: #a5b6e3;
+}
+
+//responsiveness
+@media (max-width: 900px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+}
