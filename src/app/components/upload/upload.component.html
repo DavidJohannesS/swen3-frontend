@@ -1,5 +1,5 @@
 <div class="upload-container">
-  <h2> Dokument hochladen</h2>
+  <h2>Dokument hochladen</h2>
 
   <div class="upload-box">
     <input
@@ -9,12 +9,16 @@
       #fileInput
       hidden
     />
+
     <button (click)="fileInput.click()">PDF auswählen</button>
 
     <ng-container *ngIf="file$ | async as file">
-      <p *ngIf="file">Ausgewählte Datei: <strong>{{ file.name }}</strong></p>
+      <p *ngIf="file">
+        Ausgewählte Datei: <strong>{{ file.name }}</strong>
+      </p>
     </ng-container>
 
     <button class="upload-btn" (click)="uploadFile()">Upload starten</button>
   </div>
 </div>
+

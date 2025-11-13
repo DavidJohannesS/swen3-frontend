@@ -1,46 +1,49 @@
 import { Component } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {CommonModule} from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DocumentService } from '../../services/document.service';
 
 @Component({
   selector: 'app-upload',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent {
-  // Observable für den aktuellen Datei-Namen
+
   private fileSubject = new BehaviorSubject<File | null>(null);
   file$ = this.fileSubject.asObservable();
 
-  // Wird ausgelöst, wenn der User eine Datei auswählt
-  onFileSelected(event: Event): void {
+  constructor(private documentService: DocumentService) {}
+
+  onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
-
     if (!file) return;
 
-    if (file.type !== 'application/pdf') {
-      alert('Bitte nur PDF-Dateien hochladen!');
-      input.value = ''; // reset
-      return;
-    }
-
-    // Datei im Observable speichern
     this.fileSubject.next(file);
   }
 
-  // Später kannst du hier die Upload-Logik ans Backend einfügen
-  uploadFile(): void {
+  uploadFile() {
     const file = this.fileSubject.value;
+
     if (!file) {
-      alert('Keine Datei ausgewählt!');
+      alert('Bitte PDF auswählen!');
       return;
     }
 
-    console.log('📄 Datei bereit zum Hochladen:', file.name);
-    // Hier würdest du z. B. einen HTTP-Service aufrufen:
-    // this.uploadService.upload(file).subscribe(...)
-  }
+    const doc = {
+      title: file.name.replace('.pdf', ''),
+      originalFileName: file.name,
+      mimeType: file.type,
+      sizeInBytes: file.size
+    };
 
+    this.documentService.saveDocument(doc).subscribe({
+      next: () => alert("Dokument gespeichert!"),
+      error: (err) => console.error(err)
+    });
+  }
 }

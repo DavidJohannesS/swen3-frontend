@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PaperDocument } from '../models/paper-document.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DocumentService {
+
+  private readonly BASE_URL = 'http://localhost:8080/api/documents';
+
+  constructor(private http: HttpClient) {}
+
+  saveDocument(doc: PaperDocument): Observable<PaperDocument> {
+    return this.http.post<PaperDocument>(this.BASE_URL, doc);
+  }
+
+  getAllDocuments(): Observable<PaperDocument[]> {
+    return this.http.get<PaperDocument[]>(this.BASE_URL);
+  }
+
+  getDocumentById(id: number): Observable<PaperDocument> {
+    return this.http.get<PaperDocument>(`${this.BASE_URL}/${id}`);
+  }
+}
