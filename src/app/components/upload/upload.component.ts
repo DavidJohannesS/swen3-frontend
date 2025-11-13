@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocumentService } from '../../services/document.service';
+import {PingService} from '../../services/ping.service';
 
 @Component({
   selector: 'app-upload',
@@ -16,7 +17,11 @@ export class UploadComponent {
   private fileSubject = new BehaviorSubject<File | null>(null);
   file$ = this.fileSubject.asObservable();
 
-  constructor(private documentService: DocumentService) {}
+  constructor(
+    private documentService: DocumentService,
+    private pingService: PingService
+
+  ) {}
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -46,4 +51,18 @@ export class UploadComponent {
       error: (err) => console.error(err)
     });
   }
+
+  pingBackend(): void {
+    this.pingService.ping().subscribe({
+      next: (res) => {
+        console.log('Ping erfolgreich:', res);
+        alert('Backend antwortet: ' + res);
+      },
+      error: (err) => {
+        console.error('Ping Fehler:', err);
+        alert('Backend nicht erreichbar.');
+      }
+    });
+  }
+
 }
