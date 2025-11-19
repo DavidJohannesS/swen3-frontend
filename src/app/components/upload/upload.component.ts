@@ -31,27 +31,25 @@ export class UploadComponent {
     this.fileSubject.next(file);
   }
 
-  uploadFile() {
-    const file = this.fileSubject.value;
-
-    if (!file) {
-      alert('Bitte PDF auswählen!');
-      return;
-    }
-
-    const doc = {
-      title: file.name.replace('.pdf', ''),
-      originalFileName: file.name,
-      mimeType: file.type,
-      sizeInBytes: file.size
-    };
-
-    this.documentService.saveDocument(doc).subscribe({
-      next: () => alert("Dokument gespeichert!"),
-      error: (err) => console.error(err)
-    });
+uploadFile() {
+  const file = this.fileSubject.value;
+  if (!file) {
+    alert('Bitte PDF auswählen!');
+    return;
   }
 
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('title', file.name.replace('.pdf', ''));
+  formData.append('originalFileName', file.name);
+  formData.append('mimeType', file.type);
+  formData.append('sizeInBytes', file.size.toString());
+
+  this.documentService.saveDocument(formData).subscribe({
+    next: () => alert("Dokument gespeichert!"),
+    error: (err) => console.error(err)
+  });
+}
   pingBackend(): void {
     this.pingService.ping().subscribe({
       next: (res) => {
