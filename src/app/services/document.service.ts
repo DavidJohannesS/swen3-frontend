@@ -12,10 +12,9 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {}
 
-  saveDocument(doc: PaperDocument): Observable<PaperDocument> {
-    return this.http.post<PaperDocument>(this.BASE_URL, doc);
-  }
-
+saveDocument(formData: FormData): Observable<PaperDocument> {
+  return this.http.post<PaperDocument>(this.BASE_URL, formData);
+}
   getAllDocuments(): Observable<PaperDocument[]> {
     return this.http.get<PaperDocument[]>(this.BASE_URL);
   }
