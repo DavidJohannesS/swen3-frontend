@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaperDocument } from '../models/paper-document.model';
 
@@ -22,5 +22,10 @@ export class DocumentService {
 
   getDocumentById(id: number): Observable<PaperDocument> {
     return this.http.get<PaperDocument>(`${this.BASE_URL}/${id}`);
+  }
+
+  searchDocuments(term: string): Observable<PaperDocument[]> {
+    const params = new HttpParams().set('term', term);
+    return this.http.get<PaperDocument[]>(`${this.BASE_URL}/search`, { params });
   }
 }

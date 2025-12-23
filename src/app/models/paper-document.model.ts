@@ -7,4 +7,5 @@ export interface PaperDocument {
   status?: string;
   mimeType?: string;
   sizeInBytes?: number;
+  summary?: string;
 }

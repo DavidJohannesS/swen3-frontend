@@ -1,15 +1,30 @@
 <div class="search-container">
-  <h2> Dokumentensuche</h2>
+  <h2>Dokumentensuche (AI-Summary)</h2>
 
   <div class="search-box">
     <input
       type="text"
-      placeholder="Nach Dokumentname oder Stichwort suchen..."
+      placeholder="Suchwort eingeben..."
       [(ngModel)]="searchQuery"
+      (keydown.enter)="onSearch()"
     />
-    <button class="search-btn">
-      <span class="icon">🔍</span>
-      <span>Suche</span>
+
+    <button class="search-btn" (click)="onSearch()" [disabled]="loading">
+       Suche
     </button>
   </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <p *ngIf="loading">Suche läuft…</p>
+
+  <ul *ngIf="results.length > 0">
+    <li *ngFor="let doc of results">
+      <strong>{{ doc.title || 'Dokument #' + doc.id }}</strong>
+      <p *ngIf="doc.summary">{{ doc.summary }}</p>
+    </li>
+  </ul>
+
+  <p *ngIf="!loading && results.length === 0 && searchQuery">
+    Keine Treffer gefunden.
+  </p>
 </div>
