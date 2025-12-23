@@ -8,7 +8,7 @@ import { PaperDocument } from '../models/paper-document.model';
 })
 export class DocumentService {
 
-  private readonly BASE_URL = 'http://localhost:8083/api/documents';
+  private readonly BASE_URL = 'http://localhost:8083/api';
 
   constructor(private http: HttpClient) {}
 
